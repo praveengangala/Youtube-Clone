@@ -1,7 +1,7 @@
 name: CI
 
 on:
-  workflow_dispatch:  # 👈 Manual trigger
+  workflow_dispatch:  # Manual trigger
 
 jobs:
   docker-build-and-push:
@@ -22,8 +22,8 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t praveengangala/praveengangala/youtube:${{ env.IMAGE_TAG }} .
+        docker build -t praveengangala/youtube:${{ env.IMAGE_TAG }} .
 
     - name: Push Docker image
       run: |
-        docker push praveengangala/praveengangala/youtube:${{ env.IMAGE_TAG }}
+        docker push praveengangala/youtube:${{ env.IMAGE_TAG }}
