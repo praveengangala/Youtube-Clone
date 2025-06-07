@@ -1,7 +1,7 @@
 name: CI
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
 
 jobs:
   docker-build-and-push:
@@ -11,19 +11,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-
     - name: Docker Login
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-    - name: Set Docker Image Tag
-      run: echo "IMAGE_TAG=latest" >> $GITHUB_ENV
-
     - name: Build Docker image
       run: |
-        docker build -t praveengangala/youtube:${{ env.IMAGE_TAG }} .
+        docker build -t praveengangala/youtube:latest .
 
     - name: Push Docker image
       run: |
-        docker push praveengangala/youtube:${{ env.IMAGE_TAG }}
+        docker push praveengangala/youtube:latest
